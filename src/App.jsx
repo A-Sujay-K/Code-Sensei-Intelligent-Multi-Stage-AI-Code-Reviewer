@@ -1,3 +1,4 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 export default function App() { return <><Navbar/><div className='main'>Layout Setup</div></>; }
+// TODO: Add loading state
