@@ -1,1 +1,2 @@
 body { background: #000; color: #fff; margin:0; } .main { display: flex; height: calc(100vh - 70px); } .left, .right { width: 50%; }
+.btn { transition: all 0.2s; }
