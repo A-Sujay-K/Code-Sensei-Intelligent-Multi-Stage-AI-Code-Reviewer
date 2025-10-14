@@ -1,3 +1,293 @@
-body { background: #000; color: #fff; margin:0; } .main { display: flex; height: calc(100vh - 70px); } .left, .right { width: 50%; }
-.btn { transition: all 0.2s; }
-.loader { display: block; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #0a0a12 0%, #000000 50%, #05050d 100%);
+  color: #fff;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7c3aed, #4f46e5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #8b5cf6, #6366f1);
+}
+
+/* ─── Action Buttons ─── */
+.btn-action {
+  padding: 7px 14px;
+  color: #fff;
+  border-radius: 10px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.btn-action:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.btn-action:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ─── Typography ─── */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+}
+
+p {
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* ─── Markdown / Prose ─── */
+.prose {
+  color: #e2e8f0;
+}
+
+.prose strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.prose ul,
+.prose ol {
+  margin: 0.75rem 0;
+}
+
+.prose li {
+  margin: 0.35rem 0;
+}
+
+.prose code {
+  font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+  font-size: 0.8125rem;
+}
+
+.prose pre {
+  margin: 1rem 0;
+  border-radius: 0.75rem;
+  overflow: auto;
+}
+
+.prose pre::-webkit-scrollbar {
+  height: 4px;
+}
+
+.prose pre::-webkit-scrollbar-thumb {
+  background: #4f46e5;
+  border-radius: 3px;
+}
+
+/* highlight.js theme overrides for dark code blocks */
+.prose pre code.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* ─── Toolbar ─── */
+.toolbar {
+  backdrop-filter: blur(12px);
+  background: rgba(10, 10, 20, 0.6);
+}
+
+/* ─── Native Select ─── */
+select {
+  background-color: #1a1a24;
+  border: 1px solid rgba(63, 63, 70, 0.6);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 0.625rem;
+  min-height: 38px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  padding: 0 28px 0 12px;
+  appearance: none;
+}
+
+select:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.15);
+  outline: none;
+}
+
+select:hover {
+  border-color: rgba(124, 58, 237, 0.5);
+}
+
+select option {
+  background-color: #18181b;
+  color: #fff;
+  padding: 8px;
+}
+
+/* Custom arrow */
+.relative .absolute {
+  pointer-events: none;
+}
+
+/* ─── Animations ─── */
+
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Slide in from right (toasts) */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(100px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in {
+  animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Float (hero icon) */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Bounce dots */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.animate-bounce {
+  animation: bounce 0.8s infinite;
+}
+
+/* Pulse (status dot) */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Soft pulse (issue badge) */
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.animate-pulse-soft {
+  animation: pulseSoft 2s ease-in-out infinite;
+}
+
+/* Pop (success icon) */
+@keyframes pop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.animate-pop {
+  animation: pop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Shake (error message) */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15%, 45%, 75% { transform: translateX(-3px); }
+  30%, 60%, 90% { transform: translateX(3px); }
+}
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+/* Shimmer (skeleton loading) */
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  background-size: 200px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Streaming cursor blink */
+.streaming-cursor::after {
+  content: '▊';
+  display: inline;
+  color: #9333ea;
+  animation: blink 0.8s step-end infinite;
+  font-size: 14px;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ─── Layout Helpers ─── */
+.flex-1.min-h-0 {
+  min-height: 0;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .btn-action {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .toolbar > div {
+    flex-wrap: wrap;
+  }
+
+  select {
+    min-width: 140px;
+  }
+}
