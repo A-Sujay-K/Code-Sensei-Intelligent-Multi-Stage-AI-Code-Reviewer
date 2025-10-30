@@ -294,3 +294,4 @@ select option {
 
 /* Polish animations */
 /* Performance tweaks */
+.streaming-cursor { opacity: 1; }
