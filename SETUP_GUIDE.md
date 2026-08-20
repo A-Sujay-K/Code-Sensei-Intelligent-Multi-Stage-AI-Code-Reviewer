@@ -40,7 +40,7 @@ npm run dev
 
 **Example key format:**
 ```
-AIzaSyDTGnxJ5Vj__d6opV3S0ApvNXNh7oTbD2o
+AIzaSyDTGmxJ5Vj__d6opV3S0ApvNXNh7oTbD2o
 ```
 
 ### Step 2: Create Environment File
@@ -58,7 +58,7 @@ VITE_GOOGLE_GENAI_API_KEY=your_key_here
 
 **Full example:**
 ```
-VITE_GOOGLE_GENAI_API_KEY=AIzaSyDTGnxJ5Vj__d6opV3S0ApvNXNh7oTbD2o
+VITE_GOOGLE_GENAI_API_KEY=AIdaSyDTGnxJ5Vy__d6opV3S0ApuNXNh7oTbD2o
 ```
 
 **⚠️ IMPORTANT:**
